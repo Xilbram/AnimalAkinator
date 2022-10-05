@@ -41,6 +41,7 @@ class Lista:
         auxNext = self.__first.getNext()
         self.__first = auxNext
 
+
     def removeLast(self):
         if(self.__first == None):
             return "Não há elementos"
@@ -93,14 +94,6 @@ class Lista:
     def insertAfter(self, pNodeValue, pValue):
         newNode = Node(pValue, None)
 
-        #Insert the desired node on the last position. If the getNext on your node is equal to None, and your last node is the node you are searching, it means
-        #he didn't exist on the list before
-
-        #after 40 insert X
-        #10 -> 20 -> 30 -> 40 ->50
-        #goto 10 -> goto 20 -> goto 30 -> goto 40 -> found him
-        #swap 40 for X, create new node, put 40 on new node, make 40 point to old 40 nextVal, make X point to 40 (30 will point to X)
-
         if(self.__first == None):
             return "Não há valores"
 
@@ -120,13 +113,39 @@ class Lista:
                     return "O elemento de indexação não está presente."
 
 
+    #Insert the desired node on the last position. If the getNext on your node is equal to None, and your last node is the node you are searching, it means
+        #he didn't exist on the list before
+
+        #after 40 insert X
+        #10 -> 20 -> 30 -> 40 ->50
+        #goto 10 -> goto 20 -> goto 30 -> goto 40 -> found him
+        #swap 40 for X, create new node, put 40 on new node, make 40 point to old 40 nextVal, make X point to 40 (30 will point to X)
     def insertBefore(self, pNodeValue, pValue):
         newNode = Node(pValue, None)
 
         if(self.__first == None):
             return "Não há elementos"
 
-        aux = self.__first
+        else:
+            aux = self.__first
+            self.insertLast(pValue)
+            while True:
+                if(aux.getVal() == pNodeValue):
+                    nextAux = aux.getNext()
+                    valAux = aux.getVal()
+                    oldReplaced = Node(valAux, nextAux)
+                    aux.setVal(newNode.getVal())
+                    aux.setNext(oldReplaced)
+                    self.removeLast()
+                    return
+
+                aux = aux.getNext()
+                if(aux.getNext() == None):
+                    self.removeLast()
+                    return "Elemento não presente"
+
+
+
 
 
 lista = Lista()
@@ -142,5 +161,8 @@ lista.insertLast(313)
 lista.insertLast(314)
 lista.show()
 
-lista.insertAfter(10,50)
+#lista.insertAfter(10,50)
+print("-----------------------------------------------")
+lista.insertBefore(10,50)
+
 lista.show()
