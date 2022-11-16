@@ -24,6 +24,7 @@ class Akinator:
     def __init__(self):
         self.arvore = ArvoreAkinator()
 
+    # push test
 
     def jogar(self):
         rodando = True
