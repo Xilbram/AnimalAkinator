@@ -3,8 +3,8 @@ class No:
         self.data = data
         self.direita = direita
         self.esquerda = esquerda
-
-
+        
+        
 class ArvoreAkinator:
 
     def __init__(self):
