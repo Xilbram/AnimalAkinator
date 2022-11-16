@@ -1,74 +1,76 @@
-
 class No:
-    def __init__(self, data, direita =  None, esquerda = None, ehAnimal = True):
+    def __init__(self, data, direita=None, esquerda=None):
         self.data = data
         self.direita = direita
-        self.esquerda  = esquerda
-        self.ehAnimal = ehAnimal
+        self.esquerda = esquerda
 
 
 class ArvoreAkinator:
+
     def __init__(self):
         self.raiz = No("macaco")
 
-    def inserirDireita(self, no, data):
+    def inserir_direita(self, no, data):
         no.direita = No(data)
 
-    def inserirEsquerda(self, no, data):
+    def inserir_esquerda(self, no, data):
         no.esquerda = No(data)
+
 
 class Akinator:
     def __init__(self):
         self.arvore = ArvoreAkinator()
 
-
     def jogar(self):
+
         rodando = True
         contador = 0
-        print("Pense em um animal")
+
+        print('Pense em um animal')
+        # raiz = self.arvore.raiz  # não estava sendo usado. comentei para ver se há mudança no código
         no_atual = self.arvore.raiz
+        is_animal = True
+        msg = no_atual.data
+
         while rodando:
-            if(contador > 0):
-                print("Deixe-me pensar, vamos novamente")
 
-            usr_resposta = input("Seu animal é %s? [s/n]" %no_atual.data)
+            if contador > 0:
+                print('-'*35)
 
-            #se nó for animal, verifica se acertou e prossegue de acordo
-            if(no_atual.ehAnimal == True):
-                if (usr_resposta.lower() == "s"):
-                    print("Eu sabia!")
+                if isinstance(no_atual, str):
+                    msg = no_atual
+                    is_animal = True
+
+                else:
+                    msg = no_atual.data
+                    is_animal = False
+
+            usr_resposta = input(f'Seu animal é {msg}? [s/n]: ')
+
+            # se nó for animal, verifica se acertou e prossegue de acordo
+            if is_animal:
+                if usr_resposta.lower() == 's':
+                    print('Eu sabia!')
                     rodando = False
 
                 else:
-                    animal_usuario = input("Que animal você pensou?")
+                    animal_usuario = input('Que animal você pensou? ')
 
-                    #A caracteristica fornecida pelo usuario vira a cabeça, o animal base vai para a esquerda(não)
-                    #e o novo animal para a direita(sim)
+                    # a caracteristica fornecida pelo usuario vira a cabeça, o animal base vai para a esquerda(não)
+                    # e o novo animal para a direita(sim)
 
-                    nova_pergunta = input("Como o %s é diferente de %s? Diga uma caracteristica" %(animal_usuario, no_atual.data))
+                    nova_pergunta = input(f'Como o {animal_usuario} é diferente de {msg}? Diga uma caracteristica: ')
 
-                    #direita é sim, esquerda não(animal antigo vai pra esquerda)
-                    aux = No(nova_pergunta, animal_usuario, no_atual.data, False)
-                    no_atual = aux
+                    # direita é sim, esquerda não(animal antigo vai pra esquerda)
+                    no_atual = No(data=nova_pergunta, direita=animal_usuario, esquerda=msg)
 
-            #se nó for pergunta, avança para esquerda/direita
+            # se nó for pergunta, avança para esquerda/direita
             else:
-                #sim indica que deve ir para direita
-                if (usr_resposta.lower() == "s"):
-                    no_atual = no_atual.direita
-
-                else:
-                    no_atual = no_atual.esquerda
+                # 'sim' indica que deve ir para direita
+                no_atual = no_atual.direita if usr_resposta.lower() == 's' else no_atual.esquerda
 
             contador += 1
 
 
 jogo = Akinator()
 jogo.jogar()
-
-
-
-
-
-
-
