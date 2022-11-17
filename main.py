@@ -18,7 +18,7 @@ class ArvoreAkinator:
 
 
     def inserir_esquerda(self, no, data):
-        no.esquerda = No(data)
+        no.esquerda = data
 
 
 class Akinator:
@@ -74,7 +74,11 @@ class Akinator:
                         self.arvore.raiz.esquerda = msg
 
                     else:
-                        self.arvore.inserir_direita(no_anterior, novo_no)
+                        if usr_resposta.lower() == 's':
+                            self.arvore.inserir_direita(no_anterior, novo_no)
+
+                        else:
+                            self.arvore.inserir_esquerda(no_anterior, novo_no)
 
                     recomecar = True
 
