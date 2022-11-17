@@ -26,9 +26,12 @@ class Akinator:
         self.arvore = ArvoreAkinator()
 
     def jogar(self):
-        rodando, recomecar, is_animal = True
-        no_atual, no_anterior = self.arvore.raiz
-
+        rodando = True
+        recomecar = True
+        is_animal = True
+        no_atual = self.arvore.raiz
+        no_anterior = self.arvore.raiz
+        direcao = 1
         msg = no_atual.data
         contador = 0
 
@@ -69,12 +72,14 @@ class Akinator:
                     novo_no = No(data=nova_caracteristica, direita=animal_usuario, esquerda=msg)
 
                     if contador == 1:
-                        self.arvore.raiz.data = nova_caracteristica
-                        self.arvore.raiz.direita = animal_usuario
-                        self.arvore.raiz.esquerda = msg
+                        self.arvore.raiz = novo_no
 
                     else:
-                        self.arvore.inserir_direita(no_anterior, novo_no)
+                        if(direcao == 1):
+                            self.arvore.inserir_direita(no_anterior, novo_no)
+                        else:
+                            self.arvore.inserir_esquerda(no_anterior, novo_no)
+
 
                     recomecar = True
 
@@ -84,8 +89,10 @@ class Akinator:
                 if usr_resposta.lower() == 's':
                     no_anterior = no_atual
                     no_atual = no_atual.direita
+                    direcao = 1
 
                 else:
+                    direcao = 2
                     no_anterior = no_atual
                     no_atual = no_atual.esquerda
 
