@@ -1,5 +1,6 @@
 # AnimalAkinator
 Trabalho para a materia de ED que consiste em fazer um akinator simplificado usando arvores
+Alunos: Eduardo Zanetta e Gibram Farias
 
 
 O código se utiliza de 3 classes. Uma serve para os nós da arvore. Outro é uma arvóre binária, que instancia um nó raiz com um animal(macaco)
