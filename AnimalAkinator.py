@@ -42,6 +42,7 @@ class Akinator:
                 print("--------------------------------")
                 recomecar = False
 
+
             if(contador > 0):
                 if(type(no_atual) == str):
                     msg = no_atual
