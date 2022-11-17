@@ -74,11 +74,7 @@ class Akinator:
                         self.arvore.raiz.esquerda = msg
 
                     else:
-                        if usr_resposta.lower() == 's':
-                            self.arvore.inserir_direita(no_anterior, novo_no)
-
-                        else:
-                            self.arvore.inserir_esquerda(no_anterior, novo_no)
+                        self.arvore.inserir_direita(no_anterior, novo_no)
 
                     recomecar = True
 
